@@ -10,153 +10,165 @@ const SITE_TITLE = "Ali Shibly | Real Estate Photography";
 		<title>{SITE_TITLE}</title>
 		
 		<style>
-			/* --- GLOBAL STYLES --- */
+			/* --- 1. DESIGN TOKENS --- */
 			:root {
-				--accent: #2563eb; /* Blue */
-				--accent-dark: #1e40af;
-				--dark: #1e293b;   /* Dark slate */
-				--light: #f8fafc;  /* Light gray bg */
+				--accent: #0f172a;      /* Deep Navy (Professional) */
+				--accent-blue: #3b82f6; /* Bright Blue (Highlights) */
+				--gold: #d97706;        /* Gold (Premium badges) */
+				--text-main: #1e293b;
+				--text-muted: #64748b;
+				--bg-light: #f8fafc;
 				--white: #ffffff;
-				--text-gray: #64748b;
-				--red-label: #ff3b30; /* Red for labels */
+				--shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 			}
+
 			body {
 				margin: 0;
 				font-family: system-ui, -apple-system, sans-serif;
-				background: var(--light);
-				color: var(--dark);
+				background: var(--bg-light);
+				color: var(--text-main);
 				line-height: 1.6;
 			}
-			h1, h2, h3 { margin-top: 0; line-height: 1.2; }
-			h2 { font-size: 2.5rem; text-align: center; margin-bottom: 1.5rem; }
-			.container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
-			.section-padding { padding: 5rem 0; }
+			
+			h1, h2, h3 { margin: 0; line-height: 1.2; letter-spacing: -0.02em; }
+			h2 { font-size: 2.25rem; text-align: center; margin-bottom: 3rem; color: var(--accent); }
+			p { color: var(--text-muted); }
+			
+			.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+			.section-padding { padding: 6rem 0; }
+			
 			.btn { 
-				display: inline-block; background: var(--accent); color: white; 
-				padding: 0.8rem 1.5rem; border-radius: 50px; text-decoration: none; 
-				font-weight: bold; transition: background 0.2s; border: none; cursor: pointer;
-				width: 100%; font-size: 0.9rem;
+				display: inline-block; background: var(--accent-blue); color: white; 
+				padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; 
+				font-weight: 600; transition: all 0.2s; border: none; cursor: pointer;
+				width: 100%; text-align: center; font-size: 0.95rem;
 			}
-			.btn:hover { background: var(--accent-dark); }
+			.btn:hover { background: #2563eb; transform: translateY(-1px); }
 
-			/* --- HERO SECTION --- */
+			/* --- 2. HERO SECTION (Transparent & Polished) --- */
 			.hero {
 				position: relative;
 				color: white;
-				padding: 10rem 1.5rem;
+				padding: 12rem 1.5rem;
 				text-align: center;
-				overflow: hidden;
-				background-color: var(--dark);
+				/* Winnipeg Skyline Placeholder */
+				background-image: url('https://images.unsplash.com/photo-1575900752464-5347bc228b8e?q=80&w=2070&auto=format&fit=crop');
+				background-size: cover;
+				background-position: center;
 			}
+			/* The polished dark overlay */
 			.hero::before {
 				content: '';
 				position: absolute;
-				top: 0; left: 0; width: 100%; height: 100%;
-				/* Winnipeg Skyline Placeholder */
-				background-image: url('https://images.unsplash.com/photo-1575900752464-5347bc228b8e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-				background-size: cover;
-				background-position: center;
-				opacity: 0.25;
-				z-index: 0;
+				inset: 0;
+				background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85));
 			}
-			.hero-content { position: relative; z-index: 1; }
-			.hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; }
-			.hero p { font-size: 1.25rem; color: #cbd5e1; max-width: 600px; margin: 0 auto 2rem auto; }
-			.hero .btn { width: auto; }
+			.hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+			.hero h1 { font-size: 4rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -1px; }
+			.hero p { font-size: 1.25rem; color: #cbd5e1; margin-bottom: 2.5rem; font-weight: 300; }
+			.hero-btn { width: auto; background: white; color: var(--accent); }
+			.hero-btn:hover { background: #f1f5f9; }
 
-			/* --- SERVICES GRID --- */
+			/* --- 3. SERVICES GRID --- */
 			.services-grid {
 				display: grid;
-				grid-template-columns: repeat(4, 1fr);
-				gap: 1.5rem;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 2rem;
 			}
 			.service-card {
 				background: var(--white);
 				padding: 2rem;
-				border-radius: 12px;
-				box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-				border: 1px solid #e2e8f0;
+				border-radius: 16px;
+				box-shadow: var(--shadow);
+				border: 1px solid rgba(255,255,255,0.5);
+				transition: transform 0.2s;
 				position: relative;
-				overflow: hidden;
 			}
-			.service-card h3 { font-size: 1.25rem; margin-bottom: 1rem; }
-			.service-card p { font-size: 0.95rem; color: var(--text-gray); }
+			.service-card:hover { transform: translateY(-5px); }
 			
-			/* Red Labels (Slideshow, Video) */
-			.label-red {
-				position: absolute;
-				top: 1rem;
-				right: -2rem;
-				background: var(--red-label);
-				color: white;
-				padding: 0.25rem 3rem;
-				font-size: 0.8rem;
-				font-weight: bold;
-				transform: rotate(45deg);
+			.badge {
+				display: inline-block;
+				padding: 0.25rem 0.75rem;
+				border-radius: 50px;
+				font-size: 0.75rem;
+				font-weight: 700;
+				letter-spacing: 0.05em;
+				margin-bottom: 1rem;
 				text-transform: uppercase;
 			}
-			
-			/* --- QUOTE CALCULATOR --- */
-			#quote-tool { background: var(--white); }
-			.calculator-grid {
+			.badge-gold { background: #fef3c7; color: var(--gold); }
+			.badge-blue { background: #dbeafe; color: var(--accent-blue); }
+
+			.service-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--accent); }
+			.service-card p { font-size: 0.95rem; line-height: 1.5; }
+
+			/* --- 4. CALCULATOR & PRICING --- */
+			.calc-grid {
 				display: grid;
 				grid-template-columns: repeat(4, 1fr);
 				gap: 1.5rem;
-				margin-top: 3rem;
+				align-items: stretch;
 			}
-			.calc-card {
+			
+			.pricing-card {
 				background: var(--white);
 				padding: 2rem;
-				border-radius: 12px;
-				box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-				border: 2px solid transparent;
-				text-align: center;
+				border-radius: 16px;
+				border: 1px solid #e2e8f0;
 				display: flex;
 				flex-direction: column;
-				justify-content: space-between;
+				transition: all 0.2s;
 			}
-			.calc-card h3 { margin-bottom: 0.5rem; font-size: 1.1rem; }
-			.price { font-size: 1.75rem; font-weight: 800; color: var(--accent); display: block; margin: 1rem 0; }
-			.features-list { list-style: none; padding: 0; margin: 0 0 1.5rem 0; color: var(--text-gray); font-size: 0.9rem; text-align: left; }
-			.features-list li { margin-bottom: 0.5rem; display: flex; align-items: center; }
-			.features-list li span { margin-right: 0.5rem; }
+			.pricing-card.popular {
+				border: 2px solid var(--accent-blue);
+				position: relative;
+				box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.15);
+				transform: scale(1.02);
+				z-index: 10;
+			}
+			
+			.price-tag { font-size: 2.5rem; font-weight: 800; color: var(--accent); margin: 1rem 0; }
+			.price-tag span { font-size: 1rem; color: var(--text-muted); font-weight: normal; }
+			
+			.features { list-style: none; padding: 0; margin: 0 0 2rem 0; flex-grow: 1; }
+			.features li { 
+				margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-muted); 
+				display: flex; align-items: center; 
+			}
+			.features li::before {
+				content: "✓"; color: var(--accent-blue); font-weight: bold; margin-right: 0.5rem;
+			}
+			.features li.missing { color: #cbd5e1; }
+			.features li.missing::before { content: "✕"; color: #cbd5e1; }
 
-			/* Custom Reacts Card */
-			.custom-card { border-color: var(--red-label); position: relative; }
-			.reacts-label {
-				position: absolute;
-				top: -15px;
-				left: 50%;
-				transform: translateX(-50%);
-				background: var(--red-label);
+			/* The Interactive Custom Card */
+			.custom-card {
+				background: var(--accent); /* Dark background for contrast */
 				color: white;
-				padding: 0.3rem 1.5rem;
-				font-weight: bold;
-				border-radius: 4px;
-				text-transform: uppercase;
-				letter-spacing: 1px;
+				border: 1px solid var(--accent);
 			}
-			.checkbox-group { text-align: left; margin-bottom: 1.5rem; }
-			.checkbox-label {
-				display: flex;
-				align-items: center;
-				margin-bottom: 0.75rem;
-				cursor: pointer;
-				font-size: 0.9rem;
+			.custom-card h3 { color: white; }
+			.custom-card .price-tag { color: white; }
+			
+			.custom-options { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; flex-grow: 1; }
+			.custom-checkbox {
+				display: flex; justify-content: space-between; align-items: center;
+				padding: 0.75rem; background: rgba(255,255,255,0.1); border-radius: 8px;
+				cursor: pointer; transition: background 0.2s;
 			}
-			.checkbox-label input { margin-right: 0.75rem; accent-color: var(--red-label); transform: scale(1.2); }
-			.total-display { margin-top: auto; padding-top: 1rem; border-top: 1px solid #e2e8f0; }
-			.total-label { display: block; font-size: 0.9rem; color: var(--text-gray); margin-bottom: 0.5rem; }
-			.total-price { font-size: 2rem; font-weight: 800; color: var(--red-label); }
+			.custom-checkbox:hover { background: rgba(255,255,255,0.2); }
+			.custom-checkbox input { accent-color: var(--accent-blue); transform: scale(1.2); }
+			.custom-checkbox span { font-size: 0.9rem; }
 
-			/* Highlight "Most Popular" */
-			.popular-card { border-color: var(--accent); transform: scale(1.05); z-index: 1; }
-
-			@media (max-width: 900px) {
-				.services-grid, .calculator-grid { grid-template-columns: repeat(2, 1fr); }
+			/* Responsive */
+			@media (max-width: 1024px) {
+				.calc-grid { grid-template-columns: repeat(2, 1fr); }
+				.pricing-card.popular { transform: none; }
 			}
-			@media (max-width: 600px) {
-				.services-grid, .calculator-grid { grid-template-columns: 1fr; }
+			@media (max-width: 640px) {
+				.hero h1 { font-size: 2.5rem; }
+				.calc-grid { grid-template-columns: 1fr; }
+				.services-grid { grid-template-columns: 1fr; }
 			}
 		</style>
 	</head>
@@ -164,96 +176,103 @@ const SITE_TITLE = "Ali Shibly | Real Estate Photography";
 		
 		<section class="hero">
 			<div class="hero-content">
-				<h1>Ali Shibly<br>Real Estate Photography</h1>
-				<p>Capturing Winnipeg's finest properties. Premium HDR photography, drone aerials, and immersive virtual tours to sell listings faster.</p>
-				<a href="#quote-tool" class="btn">Get an Instant Quote</a>
+				<h1>Real Estate Photography<br>Done Right.</h1>
+				<p>Premium HDR photos, cinematic drone video, and immersive 3D tours in Winnipeg. Book your shoot instantly online.</p>
+				<a href="#pricing" class="btn hero-btn">Get Started</a>
 			</div>
 		</section>
 
-		<section class="section-padding container">
-			<h2>Our Premium Services</h2>
+		<section class="container section-padding">
+			<h2>Premium Services</h2>
 			<div class="services-grid">
 				<div class="service-card">
-					<span class="label-red">SLIDESHOW</span>
-					<h3>Interior & Exterior Photos</h3>
-					<p>Stunning wide-angle HDR photos that showcase the true flow, space, and light of every room.</p>
+					<span class="badge badge-gold">Slideshow</span>
+					<h3>HDR Photography</h3>
+					<p>Wide-angle interior and exterior shots balanced for perfect light and color.</p>
 				</div>
 				<div class="service-card">
-					<span class="label-red">VIDEO</span>
-					<h3>Aerial Drone Imagery</h3>
-					<p>Highlight the property's location, lot size, and surrounding neighborhood from a unique perspective.</p>
+					<span class="badge badge-blue">Video</span>
+					<h3>Drone Aerials</h3>
+					<p>4K cinematic video and high-res photos from the sky to highlight the location.</p>
 				</div>
 				<div class="service-card">
-					<h3>3D Virtual Tours</h3>
-					<p>Create an immersive 24/7 open house experience, allowing buyers to walk through from anywhere.</p>
+					<div style="height: 25px;"></div> <h3>3D Virtual Tours</h3>
+					<p>Matterport-style walkthroughs that let buyers explore every corner remotely.</p>
 				</div>
 				<div class="service-card">
-					<h3>Floor Plan</h3>
-					<p>2D FLOOR PLAN FOR CLARITY</p>
+					<div style="height: 25px;"></div> <h3>Floor Plans</h3>
+					<p>Professional 2D layouts with measurements for absolute clarity.</p>
 				</div>
 			</div>
 		</section>
 
-		<section id="quote-tool" class="section-padding">
+		<section id="pricing" class="bg-light section-padding">
 			<div class="container">
-				<h2>Build Your Custom Package</h2>
-				<p style="text-align: center; margin-bottom: 3rem; color: var(--text-gray);">Select a popular bundle to start, or pick individual services below.</p>
+				<h2>Simple Pricing</h2>
 				
-				<div class="calculator-grid">
-					<div class="calc-card">
+				<div class="calc-grid">
+					
+					<div class="pricing-card">
 						<h3>Starter</h3>
-						<span class="price">$150</span>
-						<ul class="features-list">
-							<li><span>✅</span> Interior & Exterior Photos</li>
-							<li><span>❌</span> Drone Aerials</li>
-							<li><span>❌</span> 3D Virtual Tour</li>
+						<div class="price-tag">$150</div>
+						<ul class="features">
+							<li>HDR Photos (25)</li>
+							<li class="missing">Drone Aerials</li>
+							<li class="missing">3D Tour</li>
 						</ul>
-						<button class="btn" onclick="selectBundle('starter')">Select Starter</button>
+						<button class="btn" style="background: #e2e8f0; color: var(--accent);" onclick="setBundle('starter')">Select Starter</button>
 					</div>
-					<div class="calc-card popular-card">
-						<h3 style="color: var(--accent);">Most Popular</h3>
-						<span class="price">$225</span>
-						<ul class="features-list">
-							<li><span>✅</span> Interior & Exterior Photos</li>
-							<li><span>✅</span> Drone Aerials</li>
-							<li><span>❌</span> 3D Virtual Tour</li>
-						</ul>
-						<button class="btn" onclick="selectBundle('popular')">Select Pro</button>
-					</div>
-					<div class="calc-card">
-						<h3>Premium</h3>
-						<span class="price">$350</span>
-						<ul class="features-list">
-							<li><span>✅</span> Interior & Exterior Photos</li>
-							<li><span>✅</span> Drone Aerials</li>
-							<li><span>✅</span> 3D Virtual Tour</li>
-						</ul>
-						<button class="btn" onclick="selectBundle('premium')">Select Premium</button>
-					</div>
-					<div class="calc-card custom-card">
-						<span class="reacts-label">REACTS</span>
-						<h3>CUSTOM</h3>
-						<div class="checkbox-group" style="margin-top: 1.5rem;">
-							<label class="checkbox-label">
-								<input type="checkbox" id="cb-photos" value="150" onchange="calculateTotal()">
-								Interior & Exterior Photos
-							</label>
-							<label class="checkbox-label">
-								<input type="checkbox" id="cb-drone" value="75" onchange="calculateTotal()">
-								Drone Aerials
-							</label>
-							<label class="checkbox-label">
-								<input type="checkbox" id="cb-tour" value="125" onchange="calculateTotal()">
-								3D Virtual Tour
-							</label>
-						</div>
-						<div class="total-display">
-							<span class="total-label">Estimated Total</span>
-							<span class="total-price">$<span id="total-price">0</span></span>
-						</div>
-					</div>
-				</div>
 
+					<div class="pricing-card popular">
+						<div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent-blue); color: white; padding: 2px 12px; font-size: 0.75rem; font-weight: bold; border-radius: 20px;">MOST POPULAR</div>
+						<h3>Pro</h3>
+						<div class="price-tag">$225</div>
+						<ul class="features">
+							<li>HDR Photos (25)</li>
+							<li>Drone Aerials</li>
+							<li class="missing">3D Tour</li>
+						</ul>
+						<button class="btn" onclick="setBundle('pro')">Select Pro</button>
+					</div>
+
+					<div class="pricing-card">
+						<h3>Premium</h3>
+						<div class="price-tag">$350</div>
+						<ul class="features">
+							<li>HDR Photos (40)</li>
+							<li>Drone Aerials</li>
+							<li>3D Tour</li>
+						</ul>
+						<button class="btn" style="background: #e2e8f0; color: var(--accent);" onclick="setBundle('premium')">Select Premium</button>
+					</div>
+
+					<div class="pricing-card custom-card">
+						<h3>Custom Build</h3>
+						<div class="price-tag">$<span id="live-total">0</span></div>
+						
+						<div class="custom-options">
+							<label class="custom-checkbox">
+								<span>HDR Photos</span>
+								<input type="checkbox" id="cb-photos" value="150" onchange="calc()">
+							</label>
+							<label class="custom-checkbox">
+								<span>Drone Add-on</span>
+								<input type="checkbox" id="cb-drone" value="75" onchange="calc()">
+							</label>
+							<label class="custom-checkbox">
+								<span>3D Virtual Tour</span>
+								<input type="checkbox" id="cb-tour" value="125" onchange="calc()">
+							</label>
+							<label class="custom-checkbox">
+								<span>Floor Plan</span>
+								<input type="checkbox" id="cb-floor" value="50" onchange="calc()">
+							</label>
+						</div>
+						
+						<button class="btn" style="background: white; color: var(--accent);">Book Custom</button>
+					</div>
+
+				</div>
 			</div>
 		</section>
 
@@ -261,19 +280,20 @@ const SITE_TITLE = "Ali Shibly | Real Estate Photography";
 			const cbPhotos = document.getElementById('cb-photos');
 			const cbDrone = document.getElementById('cb-drone');
 			const cbTour = document.getElementById('cb-tour');
-			const totalPriceSpan = document.getElementById('total-price');
+			const cbFloor = document.getElementById('cb-floor');
+			const totalDisplay = document.getElementById('live-total');
 
-			// 1. Function to select a bundle
-			function selectBundle(type) {
-				// Reset all
+			function setBundle(type) {
+				// 1. Reset all
 				cbPhotos.checked = false;
 				cbDrone.checked = false;
 				cbTour.checked = false;
+				cbFloor.checked = false;
 
-				// Check according to bundle
+				// 2. Apply Bundle Logic
 				if (type === 'starter') {
 					cbPhotos.checked = true;
-				} else if (type === 'popular') {
+				} else if (type === 'pro') {
 					cbPhotos.checked = true;
 					cbDrone.checked = true;
 				} else if (type === 'premium') {
@@ -281,25 +301,24 @@ const SITE_TITLE = "Ali Shibly | Real Estate Photography";
 					cbDrone.checked = true;
 					cbTour.checked = true;
 				}
-				
-				// Recalculate total
-				calculateTotal();
+
+				// 3. Recalculate
+				calc();
 			}
 
-			// 2. Function to calculate the total price
-			function calculateTotal() {
+			function calc() {
 				let total = 0;
 				if (cbPhotos.checked) total += parseInt(cbPhotos.value);
 				if (cbDrone.checked) total += parseInt(cbDrone.value);
 				if (cbTour.checked) total += parseInt(cbTour.value);
-
-				// Update the total display
-				totalPriceSpan.innerText = total;
+				if (cbFloor.checked) total += parseInt(cbFloor.value);
+				
+				// Animate/Update the number
+				totalDisplay.innerText = total;
 			}
-
-			// Initialize total on load
-			calculateTotal();
+			
+			// Initialize
+			calc();
 		</script>
-
 	</body>
 </html>
